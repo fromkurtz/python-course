@@ -12,21 +12,23 @@ except:
 """
 
 #Exercicio 2:
-"""
-hora = int(input('Digite a hora em numeros inteiros: '))
-if 0 < hora <= 11:
-    print('Bom dia!')
-elif 12 <= hora <= 17:
-    print('Boa tarde!')
-elif hora > 24:
-    print('Hora invalida!')
-else:
-    print('Boa noite!')
+try:
+    hora = int(input('Digite a hora em numeros  inteiros: '))
+    if 0 < hora <= 11:
+        print('Bom dia!')
+    elif 12 <= hora <= 17:
+        print('Boa tarde!')
+    elif hora > 24:
+        print('Hora invalida!')
+    else:
+        print('Boa noite!')
+except:
+    print('por favor, digite apenas numeros inteiros! ')
 
-"""
+
 
 #Exercicio 3:
-
+"""
 nome = str(input('Digite seu primeiro nome: '))
 quantidade_letras = len(nome)
 
@@ -37,3 +39,4 @@ elif 4 < quantidade_letras <=6:
 else:
     print('Seu nome e muito grande! ')
     
+"""
