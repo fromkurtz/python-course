@@ -13,7 +13,7 @@ except:
 
 #Exercicio 2:
 """
-hora = int(input('Qual a hora no nomemento? '))
+hora = int(input('Digite a hora em numeros inteiros: '))
 if 0 < hora <= 11:
     print('Bom dia!')
 elif 12 <= hora <= 17:
@@ -29,6 +29,7 @@ else:
 
 nome = str(input('Digite seu primeiro nome: '))
 quantidade_letras = len(nome)
+
 if quantidade_letras <= 4:
     print('Seu nome e curto!')
 elif 4 < quantidade_letras <=6:
