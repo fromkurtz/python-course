@@ -1,7 +1,5 @@
-"""
-for in com listas
-"""
 lista = ['Maria', 'Helena', 'Luiz']
-
+cont = 0
 for nome in lista:
-    print(nome, type(nome))
+    print(f'{cont} {nome}')
+    cont += 1
