@@ -7,6 +7,7 @@ while True:
     resposta = input('[i]nserir [a]pagar [l]istar [s]air: ').strip().lower()
 
     if resposta == 'i':
+        os.system('cls')
         lista_compras.append(input('Valor: '))
 
     elif resposta == 'a':
@@ -16,7 +17,9 @@ while True:
             print('Item apagado com sucesso!')
         
         except ValueError:
-            print('Esse indice na existe!')
+            print('Por favor digite um numero inteiro!')
+        except TypeError:
+            print('Este indice nao existe na lista atual!')
 
     elif resposta == 'l':
         if '' in lista_compras:
@@ -31,4 +34,3 @@ while True:
 
     else:
         print('Essa opcao nao existe!')
-
