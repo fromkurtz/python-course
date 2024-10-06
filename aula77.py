@@ -23,5 +23,3 @@ if pessoa.get('sobrenome') is None:
     print('NÃO EXISTE')
 else:
     print(pessoa['sobrenome'])
-
-# print('ISSO Não vai')
