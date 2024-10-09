@@ -28,12 +28,18 @@ lista_de_listas_de_inteiros = [
 
 def encontra_primeiro_duplicado(lista_de_inteiros):
     numeros_checados = set()
+    primeiro_duplicado = -1
 
     for numero in lista_de_inteiros:
-        print(numero)
+        if numero in numeros_checados:
+            primeiro_duplicado = numero
+            break
 
-    print()
-    print()
+        numeros_checados.add(numero)
+    return primeiro_duplicado
 
 for lista in lista_de_listas_de_inteiros:
-    encontra_primeiro_duplicado(lista)
+    print(
+        lista, 
+        encontra_primeiro_duplicado(lista)
+    )
