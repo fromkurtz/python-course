@@ -27,4 +27,13 @@ lista_de_listas_de_inteiros = [
 ]
 
 def encontra_primeiro_duplicado(lista_de_inteiros):
-    
+    numeros_checados = set()
+
+    for numero in lista_de_inteiros:
+        print(numero)
+
+    print()
+    print()
+
+for lista in lista_de_listas_de_inteiros:
+    encontra_primeiro_duplicado(lista)
