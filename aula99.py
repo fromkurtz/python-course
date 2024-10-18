@@ -1,4 +1,4 @@
-from aula99_package.modulo import soma, fala_oi
+from aula99_package import soma, fala_oi
 
-soma(10, 54)
+print(soma(54, 5))
 fala_oi()
