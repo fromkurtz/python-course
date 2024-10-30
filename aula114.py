@@ -28,10 +28,10 @@ print(recursiva())
 #     inicio += 1
 #     return recursiva(inicio, fim)
 # print(recursiva(0, 1001))
-def factorial(n):
+def fatorial(n):
     if n <= 1:
         return 1
-    return n * factorial(n - 1)
-print(factorial(5))
-print(factorial(10))
-print(factorial(100))
+    return n * fatorial(n - 1)
+print(fatorial(5))
+print(fatorial(10))
+print(fatorial(100))
