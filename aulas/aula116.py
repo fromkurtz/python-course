@@ -23,6 +23,6 @@ caminho_arquivo = 'C:\\Users\\Bryan\\Documents\\estudos\\python_Udemy\\aula116.p
 
 caminho_arquivo = 'aula116.txt'
 
-arquivo = open(caminho_arquivo, 'w')
-
-arquivo.close()
+with open (caminho_arquivo, 'w') as arquivo:
+    print('Ola Mundo')
+    print('Arquivo vai ser fechado')
