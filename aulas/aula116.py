@@ -48,3 +48,4 @@ print('#' * 10)
 
 with open(caminho_arquivo, 'r') as arquivo:
     print(arquivo.read())
+    
