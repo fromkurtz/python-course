@@ -1,14 +1,14 @@
 import json
 
 pessoa = {
-    'nome': 'Luiz Otávio 2',
-    'sobrenome': 'Miranda',
+    'nome': 'Bryan',
+    'sobrenome': 'Kurtz Oschoski',
     'enderecos': [
         {'rua': 'R1', 'numero': 32},
         {'rua': 'R2', 'numero': 55},
     ],
-    'altura': 1.8,
-    'numeros_preferidos': (2, 4, 6, 8, 10),
+    'altura': 1.75,
+    'numeros_preferidos': (3, 5, 1, 7, 10),
     'dev': True,
     'nada': None,
 }
