@@ -1,4 +1,7 @@
-# Criando arquivos com Python + Context Manager with
+import os
+
+# Leia também: https://www.otaviomiranda.com.br/2020/normalizacao-unicode-em-python/
+# with open (context manager) e métodos úteis do TextIOWrapper
 # Usamos a função open para abrir
 # um arquivo em Python (ele pode ou não existir)
 # Modos:
@@ -18,34 +21,44 @@
 # Vamos falar mais sobre o módulo json, mas:
 # json.dump = Gera um arquivo json
 # json.load
+caminho_arquivo = 'aula116.txt'
 
-caminho_arquivo = r'C:\\Users\\Bryan\\Documents\\estudos\\python_Udemy\\'
+# arquivo = open(caminho_arquivo, 'w')
+# #
+# arquivo.close()
 
-caminho_arquivo += 'aula116.txt'
+# with open(caminho_arquivo, 'w+') as arquivo:
+#     arquivo.write('Linha 1\n')
+#     arquivo.write('Linha 2\n')
+#     arquivo.writelines(
+#         ('Linha 3\n', 'Linha 4\n')
+#     )
+#     arquivo.seek(0, 0)
+#     print(arquivo.read())
+#     print('Lendo')
+#     arquivo.seek(0, 0)
+#     print(arquivo.readline(), end='')
+#     print(arquivo.readline().strip())
+#     print(arquivo.readline().strip())
 
-with open(caminho_arquivo, 'w+') as arquivo:
-    print('arquivo aberto')
+#     print('READLINES')
+#     arquivo.seek(0, 0)
+#     for linha in arquivo.readlines():
+#         print(linha.strip())
+
+
+# print('#' * 10)
+
+# with open(caminho_arquivo, 'r') as arquivo:
+#     print(arquivo.read())
+
+with open(caminho_arquivo, 'w', encoding='utf8') as arquivo:
+    arquivo.write('Atenção\n')
     arquivo.write('Linha 1\n')
     arquivo.write('Linha 2\n')
     arquivo.writelines(
-        ('Linha 2\n', 'Linha 4\n')
+        ('Linha 3\n', 'Linha 4\n')
     )
-    arquivo.seek(0, 0)
-    print(arquivo.read())
-    print('lendo')
-    arquivo.seek(0, 0)
-    print(arquivo.readline(), end='')
-    print(arquivo.readline().strip())
-    print(arquivo.readline().strip())
-    
-    print('Readlines')
-    arquivo.seek(0, 0)
-    for linha in arquivo.readlines():
-        print(linha.strip())
-        
 
-print('#' * 10)
-
-with open(caminho_arquivo, 'r') as arquivo:
-    print(arquivo.read())
-    
+# os.remove(caminho_arquivo) # ou unlink
+# os.rename(caminho_arquivo, 'aula116-2.txt')
