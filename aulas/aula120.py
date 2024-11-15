@@ -12,11 +12,11 @@ class Pessoa:
     ...
 
 
-p1 = Pessoa('Luiz', 'Otávio')
+p1 = Pessoa()
 p1.nome = 'Luiz'
 p1.sobrenome = 'Otávio'
 
-p2 = Pessoa('Maria', 'Joana')
+p2 = Pessoa()
 p2.nome = 'Maria'
 p2.sobrenome = 'Joana'
 
