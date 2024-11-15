@@ -9,16 +9,18 @@
 # print(string.upper())
 # print(isinstance(string, str))
 class Pessoa:
-    ...
+    def __init__(self, nome, sobrenome):
+        self.nome = nome
+        self.sobrenome = sobrenome
 
 
-p1 = Pessoa()
-p1.nome = 'Luiz'
-p1.sobrenome = 'Otávio'
+p1 = Pessoa('Luiz', 'Otavio')
+#p1.nome = 'Luiz'
+#p1.sobrenome = 'Otávio'
 
-p2 = Pessoa()
-p2.nome = 'Maria'
-p2.sobrenome = 'Joana'
+p2 = Pessoa('Maria', 'Joana')
+#p2.nome = 'Maria'
+#p2.sobrenome = 'Joana'
 
 print(p1.nome)
 print(p1.sobrenome)
