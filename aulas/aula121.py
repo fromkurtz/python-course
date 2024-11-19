@@ -11,7 +11,9 @@ class Carro:
 fusca = Carro('Fusca')
 print(fusca.nome)
 fusca.acelerar()
+Carro.acelerar(fusca)
 
 corolla = Carro('Corolla')
 print(corolla.nome)
 corolla.acelerar()
+Carro.acelerar(corolla)
