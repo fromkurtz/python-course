@@ -8,4 +8,5 @@ class Pessoa:
         self.idade = idade
 
 p1 = Pessoa('Joao', 33)
-p2 = P
+p2 = Pessoa('Helena', 12)
+p3 = Pessoa('Joana', 53)
