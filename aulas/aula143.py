@@ -13,8 +13,8 @@ class AbstractFoo(ABC):
         self.name = name
 
     @property
-    def name(self):
-        return self._name
+    @abstractmethod
+    def name(self): ...
 
     @name.setter
     def name(self, name):
