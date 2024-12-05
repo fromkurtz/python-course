@@ -14,4 +14,3 @@ iphone = Smartphone('iPhone')
 
 galaxy_s.ligar()
 iphone.desligar()
-mudanca
