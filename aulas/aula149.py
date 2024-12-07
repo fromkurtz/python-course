@@ -18,17 +18,28 @@
 # Ex:
 # with open('aula149.txt', 'w') as arquivo:
 #     ...
-class MyContextManager:
+class MyOpen:
+    def __init__(self, camiho_arquivo, modo):
+        self.caminho_arquivo = camiho_arquivo
+        self.modo = modo
+        self._arquivo = None
+
     def __enter__(self):
-        print('ENTER')
-        return 1234
+        print('Abrindo arquivo')
+        self._arquivo = open(self.caminho_arquivo, self.modo, encoding='utf8')
+        return self._arquivo
     
     def __exit__(self, class_exception, exception, treaceback_):
-        print('EXIT')
+        print('Fechando arquivo')
+        self._arquivo.close
 
 
-instacia = MyContextManager()
 
-with instacia as alguma_coisa:
-    pass
+
+
+with MyOpen('aula149.txt', 'w') as arquivo:
+    arquivo.write('Linha 1\n')
+    arquivo.write('Linha 2\n')
+    arquivo.write('Linha 3\n')
+    print('with', arquivo)
 
