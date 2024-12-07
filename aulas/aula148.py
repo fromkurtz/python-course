@@ -7,12 +7,18 @@
 # __init__ ❗️NÃO DEVE retornar nada (None)❗️
 # object é a super classe de uma classe
 class A:
-    def __init__(self):
-        print(self)
+    def __new__(cls, *args, **kwargs):
+        instacia = super().__new__(cls)
+        return instacia
+
+    def __init__(self, x):
+        self.x = x
+        print('Sou o init')
 
     def __repr__(self):
         return 'A()'
     
 
-a = A()
+a = A(123)
+print(a.x)
 
