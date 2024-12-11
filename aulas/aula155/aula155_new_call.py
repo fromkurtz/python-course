@@ -14,6 +14,12 @@ class Meta(type):
             raise NotImplementedError('Implemente falar')
 
         return cls
+    
+
+    def __call__(cls, *args, **kwds):
+        instancia = super().__call__(*args, **kwds)
+        print(instancia.__dict__)
+        return instancia
 
     def __call__(cls, *args, **kwargs):
         instancia = super().__call__(*args, **kwargs)
