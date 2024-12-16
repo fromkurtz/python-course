@@ -1,86 +1,37 @@
-from abc import abstractmethod
+"""
+Exercício com Abstração, Herança, Encapsulamento e Polimorfismo
+Criar um sistema bancário (extremamente simples) que tem clientes, contas e
+um banco. A ideia é que o cliente tenha uma conta (poupança ou corrente) e que
+possa sacar/depositar nessa conta. Contas corrente tem um limite extra.
 
+Conta (ABC)
+    ContaCorrente
+    ContaPoupanca
 
-class Banco:
-    agencia = 9991
+Pessoa
+    Cliente
+        Clente -> Conta (um para um ou um para muitos)
 
-    def autenticando(self, cliente):
-        if cliente.conta.agencia != self.agencia:
-            print('A conta informada nao pertence a esse banco.')
-            return
-        cliente.conta.permissao = True
+Banco
+    Banco -> Cliente
+    Banco -> Conta
 
-
-class Pessoa:
-    def __init__(self, nome, idade):
-        self.nome = nome
-        self.idade = idade
-
-
-class Cliente(Pessoa):
-    def __init__(self, nome, idade, conta):
-        super().__init__(nome, idade)
-        self.nome = nome
-        self.idade = idade
-        self.conta = conta
-    
-
-class Conta:
-    def __init__(self, agencia, numero_conta, saldo):
-        self.agencia = agencia
-        self.numero_conta = numero_conta
-        self.saldo = saldo
-
-    @abstractmethod
-    def sacar(self, valor):
-        pass
-
-    def depositar(self, valor):
-        self.saldo += valor
-        self.detalhes(f'(DEPOSITO {valor})')
-
-    def detalhes(self, msg=''):
-        print(f'O seu saldo e {self.saldo:.2f} {msg}')
-
-
-
-class ContaPoupanca(Conta):
-    permissao = False
-
-    def sacar(self, valor):
-        if self.saldo - valor < 0 or not self.permissao:
-            print('Voce nao tem permissao para sacar')
-            return
-        self.saldo -= valor
-
-
-
-class ContaCorrente(Conta):
-    limite = 1000
-    permissao = False
-
-    def sacar(self, valor):
-        if self.saldo - valor < self.limite * -1 or not self.permissao:
-            print('Voce nao tem permissao para sacar')
-            return
-        self.saldo -= valor
-
-banco = Banco()
-conta1 = ContaCorrente(9991, 111111, 1000)
-c1 = Cliente('Lizete', 19, conta1)
-banco.autenticando(c1)
-c1.conta.sacar(10101)
-print(c1.nome)
-print(c1.conta.saldo)
-
- 
-print()
- 
-conta2 = ContaPoupanca(9991, 213333, 300)
-c2 = Cliente('João', 32, conta2)
-banco.autenticando(c2)
-c2.conta.depositar(200)
-print(c2.nome)
-print(c2.conta.saldo)
-print('ola')
-
+Dicas:
+Criar classe Cliente que herda da classe Pessoa (Herança)
+    Pessoa tem nome e idade (com getters)
+    Cliente TEM conta (Agregação da classe ContaCorrente ou ContaPoupanca)
+Criar classes ContaPoupanca e ContaCorrente que herdam de Conta
+    ContaCorrente deve ter um limite extra
+    Contas têm agência, número da conta e saldo
+    Contas devem ter método para depósito
+    Conta (super classe) deve ter o método sacar abstrato (Abstração e
+    polimorfismo - as subclasses que implementam o método sacar)
+Criar classe Banco para AGREGAR classes de clientes e de contas (Agregação)
+Banco será responsável autenticar o cliente e as contas da seguinte maneira:
+    Banco tem contas e clentes (Agregação)
+    * Checar se a agência é daquele banco
+    * Checar se o cliente é daquele banco
+    * Checar se a conta é daquele banco
+Só será possível sacar se passar na autenticação do banco (descrita acima)
+Banco autentica por um método.
+"""
