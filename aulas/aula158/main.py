@@ -31,13 +31,17 @@ class Conta:
         self.numero_conta = numero_conta
         self.saldo = saldo
 
-    def depositar(self, valor):
-        self.saldo += valor
-
-
     @abstractmethod
     def sacar(self, valor):
         pass
+
+    def depositar(self, valor):
+        self.saldo += valor
+        self.detalhes(f'(DEPOSITO {valor})')
+
+    def detalhes(self, msg=''):
+        print(f'O seu saldo e {self.saldo:.2f} {msg}')
+
 
 
 class ContaPoupanca(Conta):
@@ -63,11 +67,12 @@ class ContaCorrente(Conta):
 
 banco = Banco()
 conta1 = ContaCorrente(9991, 111111, 1000)
-c1 = Cliente('Lisete', 19, conta1)
+c1 = Cliente('Lizete', 19, conta1)
 banco.autenticando(c1)
 c1.conta.sacar(500)
 print(c1.nome)
 print(c1.conta.saldo)
+
  
 print()
  
