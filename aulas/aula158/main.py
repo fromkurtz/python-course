@@ -82,5 +82,5 @@ banco.autenticando(c2)
 c2.conta.depositar(200)
 print(c2.nome)
 print(c2.conta.saldo)
-print(    'ola')
+print('ola')
 
