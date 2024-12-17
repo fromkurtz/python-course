@@ -21,7 +21,7 @@ class Pessoa:
 
 
     def __post_init(self):
-        self.nome_completo = f'{self.nome} {self.sobrenome}'
+        print('Pos init')
     
 
 
