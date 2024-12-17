@@ -31,5 +31,7 @@ class Banco:
         return False
     
 
-    def autenticar(self, ciente, conta):
-        
+    def autenticar(self, cliente, conta):
+        return self._checa_agencia(conta) and \
+            self._checa_cliente(cliente) and \
+            self._checa_conta(conta)
