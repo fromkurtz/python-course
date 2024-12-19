@@ -4,6 +4,7 @@
 # estrutura usada nessa aula.
 # https://docs.python.org/3/library/collections.abc.html
 from collections.abc import Sequence
+
 class MyList(Sequence):
     def __init__(self):
         self._data = {}
