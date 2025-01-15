@@ -57,6 +57,11 @@ if __name__ == '__main__':
     try:
         search_input.send_keys('Hello world')
         search_input.send_keys(Keys.ENTER)
+
+        results = browser.find_element(By.ID, 'res')
+        links = browser.find_elements(By.TAG_NAME, 'a')
+        links[0].click()
+
     except Exception as e:
         print(f'Erro: {e}')
 
