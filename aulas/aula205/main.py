@@ -9,6 +9,16 @@ TABLE_NAME = 'customers'
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
+# CUIDADO: fazendo delete sem where
+cursor.execute(
+    f'DELETE FROM {TABLE_NAME}'
+ )
+cursor.execute(
+    f'DELETE FROM sqlite_sequence WHERE name="{TABLE_NAME}"'
+ )
+connection.commit()
+
+# Cria tabela
 cursor.execute(
     f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
     '('
@@ -16,6 +26,14 @@ cursor.execute(
     'name TEXT,'
     'weight REAL'
     ')'
+)
+connection.commit()
+
+# Registrar valores nas colunas da tabela
+cursor.execute(
+    f'INSERT INTO {TABLE_NAME} (name, weight) VALUES (?, ?)',
+    ('João', 80)
+    
 )
 connection.commit()
 
