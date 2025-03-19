@@ -12,12 +12,6 @@ cursor.execute(
     f'SELECT * FROM {TABLE_NAME}'
 )
 
-# DELETE mais cuidadoso
-cursor.execute(
-    f'DELETE FROM sqlite_sequence WHERE name="{TABLE_NAME}"'
-)
-connection.commit()
-
 for row in cursor.fetchall():
     _id, name, weight = row
     print(_id, name, weight)
