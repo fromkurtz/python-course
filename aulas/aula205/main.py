@@ -42,6 +42,7 @@ sql = (
     'VALUES '
     '(:nome, :peso)'
 )
+
 # cursor.execute(sql, ['Joana', 4])
 # cursor.executemany(
 #     sql,
@@ -49,6 +50,7 @@ sql = (
 #         ('Joana', 4), ('Luiz', 5)
 #     )
 # )
+
 cursor.execute(sql, {'nome': 'Sem nome', 'peso': 3})
 cursor.executemany(sql, (
     {'nome': 'Joãozinho', 'peso': 3},
@@ -66,6 +68,7 @@ if __name__ == '__main__':
         f'DELETE FROM {TABLE_NAME} '
         'WHERE id = "3"'
     )
+    
     cursor.execute(
         f'DELETE FROM {TABLE_NAME} '
         'WHERE id = 1'
