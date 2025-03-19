@@ -5,9 +5,18 @@ from main import DB_FILE, TABLE_NAME
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
+# CRUD - Create, Read, Update, Delete
+# SQL -  insert, select, update, delete
+
 cursor.execute(
     f'SELECT * FROM {TABLE_NAME}'
 )
+
+# DELETE mais cuidadoso
+cursor.execute(
+    f'DELETE FROM sqlite_sequence WHERE name="{TABLE_NAME}"'
+)
+connection.commit()
 
 for row in cursor.fetchall():
     _id, name, weight = row
