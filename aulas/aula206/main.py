@@ -6,8 +6,13 @@ import pymysql
 
 connection = pymysql.connect(
     host='localhost',
-    user='',
-    password='',
-    database='',
-    charset='utf8mb4',
+    user='usuario',
+    password='senha',
+    database='base_de_dados',
 )
+cursor = connection.cursor()
+
+# SQL
+
+cursor.close()
+connection.close()
