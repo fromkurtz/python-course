@@ -27,5 +27,3 @@ with connection:
         )
         connection.commit()
         print(cursor)
-
-
