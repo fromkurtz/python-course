@@ -7,6 +7,8 @@ import os
 import pymysql
 import dotenv
 
+dotenv.load_dotenv()
+
 connection = pymysql.connect(
     host=os.environ['MYSQL_HOST'],
     user=os.environ['MYSQL_USER'],
@@ -17,12 +19,11 @@ connection = pymysql.connect(
 with connection:
     with connection.cursor() as cursor:
         cursor.execute(
-            'CREATE TABLE customers ('
-            'id INT NOT NULL AUTO_INCREMENT, '
-            'nome VARCHAR(50) NOT NULL, '
-            'idade INT NOT NULL, '
-            'PRIMARY KEY (id)'
-            ')'
+            'CREATE TABLE IF NOT EXISTS `pessoas` ('
+            '  `id` INT NOT NULL AUTO_INCREMENT,'
+            '  `nome` VARCHAR(45) NOT NULL,'
+            '  `idade` INT NOT NULL,'
+            '  PRIMARY KEY (`id`))'
             
         )
         connection.commit()
