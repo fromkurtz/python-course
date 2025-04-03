@@ -7,6 +7,8 @@ import os
 import pymysql
 import dotenv
 
+TABLE_NAME = 'pessoas'
+
 dotenv.load_dotenv()
 
 connection = pymysql.connect(
@@ -19,12 +21,23 @@ connection = pymysql.connect(
 with connection:
     with connection.cursor() as cursor:
         cursor.execute(
-            'CREATE TABLE IF NOT EXISTS `pessoas` ('
+            f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
             '  `id` INT NOT NULL AUTO_INCREMENT,'
             '  `nome` VARCHAR(45) NOT NULL,'
             '  `idade` INT NOT NULL,'
             '  PRIMARY KEY (`id`))'
             
         )
+
+        # CUIDADO: ISSO LIMPA A TABELA E APAGA TODOS OS DADOS
+        cursor.execute(f'TRUNCATE TABLE {TABLE_NAME}')
         connection.commit()
-        print(cursor)
+
+    with connection.cursor() as cursor:
+        sql = f'INSERT INTO {TABLE_NAME} (`nome`, `idade`) VALUES (%s, %s) '
+        data = ('Lucas', 30)
+            
+        result = cursor.execute(sql, data)
+        print(result)
+    connection.commit()
+
