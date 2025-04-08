@@ -106,11 +106,16 @@ with connection:
 
     # Lendo os valores com SELECT
     with connection.cursor() as cursor:
+        menor_id = input('Digite o menor id: ')
+        maior_id = input('Digite o maior id: ')
+
         sql = (
             f'SELECT * FROM {TABLE_NAME} '
-            'WHERE ID > 3'
+            'WHERE ID BETWEEN %s AND %s'
         )
-        cursor.execute(sql) 
+        
+        cursor.execute(sql, (menor_id, maior_id))
+        print(cursor.mogrify(sql, (menor_id, maior_id)))
         data5 = cursor.fetchall()
 
         for row in data5:
