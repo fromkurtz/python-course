@@ -108,7 +108,7 @@ with connection:
     with connection.cursor() as cursor:
         sql = (
             f'SELECT * FROM {TABLE_NAME} '
-            'WHERE ID > 3q'
+            'WHERE ID > 3'
         )
         cursor.execute(sql) 
         data5 = cursor.fetchall()
