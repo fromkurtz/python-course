@@ -127,26 +127,26 @@ with connection:
             f'DELETE FROM {TABLE_NAME} WHERE ID = %s'
             
         )
-        print(cursor.execute(sql, (1,)))
+        # print(cursor.execute(sql, (1,)))
+        # connection.commit()
+
+        cursor.execute(f'SELECT * FROM {TABLE_NAME}')
+
+        # for row in cursor.fetchall():
+        #     print(row)    
+
+    # editando com UPDATE, WHERE e placeholder no PyMySQL
+    with connection.cursor() as cursor:
+        sql = (
+            f'UPDATE {TABLE_NAME} '
+            'SET name = %s, age = %s '
+            'WHERE ID = %s'
+            
+        )
+        cursor.execute(sql, ('Gabriel', 20, 4))
         connection.commit()
 
         cursor.execute(f'SELECT * FROM {TABLE_NAME}')
 
         for row in cursor.fetchall():
             print(row)    
-
-    # editando com UPDATE, WHERE e placeholder no PyMySQL
-    with connection.cursor() as cursor:
-        sql = (
-            f'UPTADE {TABLE_NAME}'
-            'SET name = %s, age = %s '
-            'WHERE ID = %s'
-            
-        )
-        print(cursor.execute(sql, (1,)))
-        connection.commit()
-
-        cursor.execute(f'SELECT * FROM {TABLE_NAME}')
-
-        # for row in cursor.fetchall():
-        #     print(row)    
