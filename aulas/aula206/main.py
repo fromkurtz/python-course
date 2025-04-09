@@ -106,8 +106,8 @@ with connection:
 
     # Lendo os valores com SELECT
     with connection.cursor() as cursor:
-        menor_id = input('Digite o menor id: ')
-        maior_id = input('Digite o maior id: ')
+        menor_id = 2
+        maior_id = 4
 
         sql = (
             f'SELECT * FROM {TABLE_NAME} '
@@ -115,8 +115,22 @@ with connection:
         )
         
         cursor.execute(sql, (menor_id, maior_id))
-        print(cursor.mogrify(sql, (menor_id, maior_id)))
+        # print(cursor.mogrify(sql, (menor_id, maior_id)))
         data5 = cursor.fetchall()
 
-        for row in data5:
-            print(row)
+        # for row in data5:
+        #     print(row)
+
+        # Lendo os valores com SELECT
+    with connection.cursor() as cursor:
+        sql = (
+            f'DELETE FROM {TABLE_NAME} WHERE ID = %s'
+            
+        )
+        print(cursor.execute(sql, (1,)))
+        connection.commit()
+
+        cursor.execute(f'SELECT * FROM {TABLE_NAME}')
+
+        for row in cursor.fetchall():
+            print(row)    
