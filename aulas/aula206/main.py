@@ -146,14 +146,18 @@ with connection:
             
         )
         cursor.execute(sql, ('Gabriel', 20, 4))
-        connection.commit()
-
         cursor.execute(f'SELECT * FROM {TABLE_NAME}')
+        
+        data6 = cursor.fetchall()
 
-        # for row in cursor.fetchall():
-        #     _id, name, age = row
-        #     print(f'{_id=}, {name=}, {age=}')
+        print()
+        print('for 1: ')
+        for row in data6:
+            print(row)
 
+        print()
+        print('for 2: ')
         for row in cursor.fetchall():
             print(row)
-        connection.commit()  
+
+        connection.commit()
