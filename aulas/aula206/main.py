@@ -3,12 +3,14 @@
 # Pypy: https://pypi.org/project/pymysql/
 # GitHub: https://github.com/PyMySQL/PyMySQL
 import os
+from typing import cast
 
 import dotenv
 import pymysql
 import pymysql.cursors
 
 TABLE_NAME = 'customers'
+CURRENT_CURSOR = pymysql.cursors.DictCursor
 
 dotenv.load_dotenv()
 
@@ -18,21 +20,21 @@ connection = pymysql.connect(
     password=os.environ['MYSQL_PASSWORD'],
     database=os.environ['MYSQL_DATABASE'],
     charset='utf8mb4',
-    cursorclass=pymysql.cursors.DictCursor,
+    cursorclass=CURRENT_CURSOR,
 )
 
 with connection:
     with connection.cursor() as cursor:
-        cursor.execute(
+        cursor.execute(  # type: ignore
             f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
             'id INT NOT NULL AUTO_INCREMENT, '
-            'name VARCHAR(50) NOT NULL, '
-            'age INT NOT NULL, '
+            'nome VARCHAR(50) NOT NULL, '
+            'idade INT NOT NULL, '
             'PRIMARY KEY (id)'
             ') '
         )
         # CUIDADO: ISSO LIMPA A TABELA
-        cursor.execute(f'TRUNCATE TABLE {TABLE_NAME}')
+        cursor.execute(f'TRUNCATE TABLE {TABLE_NAME}')  # type: ignore
     connection.commit()
 
     # Começo a manipular dados a partir daqui
@@ -41,12 +43,12 @@ with connection:
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
-            '(name, age) '
+            '(nome, idade) '
             'VALUES '
             '(%s, %s) '
         )
         data = ('Luiz', 18)
-        result = cursor.execute(sql, data)
+        result = cursor.execute(sql, data)  # type: ignore
         # print(sql, data)
         # print(result)
     connection.commit()
@@ -55,7 +57,7 @@ with connection:
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
-            '(name, age) '
+            '(nome, idade) '
             'VALUES '
             '(%(name)s, %(age)s) '
         )
@@ -63,7 +65,7 @@ with connection:
             "age": 37,
             "name": "Le",
         }
-        result = cursor.execute(sql, data2)
+        result = cursor.execute(sql, data2)  # type: ignore
         # print(sql)
         # print(data2)
         # print(result)
@@ -73,7 +75,7 @@ with connection:
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
-            '(name, age) '
+            '(nome, idade) '
             'VALUES '
             '(%(name)s, %(age)s) '
         )
@@ -82,7 +84,7 @@ with connection:
             {"name": "Júlia", "age": 74, },
             {"name": "Rose", "age": 53, },
         )
-        result = cursor.executemany(sql, data3)
+        result = cursor.executemany(sql, data3)  # type: ignore
         # print(sql)
         # print(data3)
         # print(result)
@@ -92,15 +94,16 @@ with connection:
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
-            '(name, age) '
+            '(nome, idade) '
             'VALUES '
             '(%s, %s) '
         )
         data4 = (
             ("Siri", 22, ),
             ("Helena", 15, ),
+            ("Luiz", 18, ),
         )
-        result = cursor.executemany(sql, data4)
+        result = cursor.executemany(sql, data4)  # type: ignore
         # print(sql)
         # print(data4)
         # print(result)
@@ -108,56 +111,67 @@ with connection:
 
     # Lendo os valores com SELECT
     with connection.cursor() as cursor:
+        # menor_id = int(input('Digite o menor id: '))
+        # maior_id = int(input('Digite o maior id: '))
         menor_id = 2
         maior_id = 4
 
         sql = (
             f'SELECT * FROM {TABLE_NAME} '
-            'WHERE ID BETWEEN %s AND %s'
+            'WHERE id BETWEEN %s AND %s  '
         )
-        
-        cursor.execute(sql, (menor_id, maior_id))
-        # print(cursor.mogrify(sql, (menor_id, maior_id)))
-        data5 = cursor.fetchall()
+
+        cursor.execute(sql, (menor_id, maior_id))  # type: ignore
+        # print(cursor.mogrify(sql, (menor_id, maior_id)))  # type: ignore
+        data5 = cursor.fetchall()  # type: ignore
 
         # for row in data5:
+        # print(row)
+
+    # Apagando com DELETE, WHERE e placeholders no PyMySQL
+    with connection.cursor() as cursor:
+        sql = (
+            f'DELETE FROM {TABLE_NAME} '
+            'WHERE id = %s'
+        )
+        cursor.execute(sql, (1,))  # type: ignore
+        connection.commit()
+
+        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')  # type: ignore
+
+        # for row in cursor.fetchall():  # type: ignore
         #     print(row)
 
-    # deletando valores com DELETE
+    # Editando com UPDATE, WHERE e placeholders no PyMySQL
     with connection.cursor() as cursor:
-        sql = (
-            f'DELETE FROM {TABLE_NAME} WHERE ID = %s'
-            
-        )
-        # print(cursor.execute(sql, (1,)))
-        # connection.commit()
+        cursor = cast(CURRENT_CURSOR, cursor)
 
-        cursor.execute(f'SELECT * FROM {TABLE_NAME}')
-
-        # for row in cursor.fetchall():
-        #     print(row)    
-
-    # editando com UPDATE, WHERE e placeholder no PyMySQL
-    with connection.cursor() as cursor:
         sql = (
             f'UPDATE {TABLE_NAME} '
-            'SET name = %s, age = %s '
-            'WHERE ID = %s'
-            
+            'SET nome=%s, idade=%s '
+            'WHERE id=%s'
         )
-        cursor.execute(sql, ('Gabriel', 20, 4))
-        cursor.execute(f'SELECT * FROM {TABLE_NAME}')
-        
+        cursor.execute(sql, ('Eleonor', 102, 4))
+
+        cursor.execute(
+            f'SELECT id from {TABLE_NAME} ORDER BY id DESC LIMIT 1'
+        )
+        lastIdFromSelect = cursor.fetchone()
+
+        resultFromSelect = cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
+
         data6 = cursor.fetchall()
 
-        print()
-        print('for 1: ')
         for row in data6:
             print(row)
 
-        print()
-        print('for 2: ')
-        for row in cursor.fetchall():
-            print(row)
+        print('resultFromSelect', resultFromSelect)
+        print('len(data6)', len(data6))
+        print('rowcount', cursor.rowcount)
+        print('lastrowid', cursor.lastrowid)
+        print('lastrowid na mão', lastIdFromSelect)
 
-        connection.commit()
+        cursor.scroll(0, 'absolute')
+        print('rownumber', cursor.rownumber)
+
+    connection.commit()
