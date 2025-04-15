@@ -28,8 +28,8 @@ with connection:
         cursor.execute(  # type: ignore
             f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
             'id INT NOT NULL AUTO_INCREMENT, '
-            'nome VARCHAR(50) NOT NULL, '
-            'idade INT NOT NULL, '
+            'name VARCHAR(50) NOT NULL, '
+            'age INT NOT NULL, '
             'PRIMARY KEY (id)'
             ') '
         )
@@ -43,7 +43,7 @@ with connection:
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
-            '(nome, idade) '
+            '(name, age) '
             'VALUES '
             '(%s, %s) '
         )
@@ -57,7 +57,7 @@ with connection:
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
-            '(nome, idade) '
+            '(name, age) '
             'VALUES '
             '(%(name)s, %(age)s) '
         )
@@ -75,7 +75,7 @@ with connection:
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
-            '(nome, idade) '
+            '(name, age) '
             'VALUES '
             '(%(name)s, %(age)s) '
         )
@@ -94,7 +94,7 @@ with connection:
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
-            '(nome, idade) '
+            '(name, age) '
             'VALUES '
             '(%s, %s) '
         )
@@ -148,7 +148,7 @@ with connection:
 
         sql = (
             f'UPDATE {TABLE_NAME} '
-            'SET nome=%s, idade=%s '
+            'SET name=%s, age=%s '
             'WHERE id=%s'
         )
         cursor.execute(sql, ('Eleonor', 102, 4))
