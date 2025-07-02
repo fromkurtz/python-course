@@ -129,3 +129,5 @@ webcolors==1.13
 webencodings==0.5.1
 websocket-client==1.5.1
 wsproto==1.2.0
+selenium==4.34.0
+webdriver-manager==4.0.2
