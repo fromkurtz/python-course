@@ -44,6 +44,9 @@ class Moto(Veiculo):
         print("Buscando cliente de Moto")
 
 class VeiculoFactory:
+    def __init__(self, tipo):
+        self.carro = self.get_carro(tipo)
+
     @staticmethod
     def get_carro(tipo: str) -> Veiculo:
         if tipo == "luxo":
@@ -55,10 +58,14 @@ class VeiculoFactory:
         else:
             raise ValueError(f"Tipo de carro '{tipo}' não reconhecido")
         
+    def buscar_cliente(self):
+        self.carro.buscar_cliente()
+
+        
 if __name__ == "__main__":
     from random import choice
     carros_disponiveis = ["luxo", "popular", "moto"]
 
     for i in range(10):
-        carro = VeiculoFactory.get_carro(choice(carros_disponiveis))
+        carro = VeiculoFactory(choice(carros_disponiveis))
         carro.buscar_cliente()
