@@ -45,7 +45,7 @@ class Moto(Veiculo):
 
 class VeiculoFactory(ABC):
     def __init__(self, tipo):
-        self.carro = self.get _carro(tipo)
+        self.carro = self.get_carro(tipo)
 
     @staticmethod
     @abstractmethod
