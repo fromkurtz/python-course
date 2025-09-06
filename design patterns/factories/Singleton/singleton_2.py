@@ -10,6 +10,10 @@ def singleton(the_class):
    
     return get_class
 
+@singleton
+class Teste:
+    def __init__(self):
+        pass
 
 @singleton
 class AppSettings:
