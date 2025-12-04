@@ -11,7 +11,16 @@ class AppSettings:
             cls._instance = super().__new__(cls, *args, **kwargs)
         return cls._instance
     
+    def __init__(self):
+        """ O init sera chamado todas as vezes que a classe for instanciada,"""
+        self.tema = "O tema escuro"
+        self.font = '18px'
+
 
 if __name__ == "__main__":
     as1 = AppSettings()
+    as1.tema = 'O tema claro'
+    print(as1.tema)
+
     as2 = AppSettings()
+    print(as1.tema)
